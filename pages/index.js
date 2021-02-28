@@ -1,65 +1,68 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import {useEffect, useRef, useState} from 'react'
+import Header from '../components/header'
+import { Container, Box, AspectRatio, SimpleGrid, Divider, InputGroup, Input, Button, Heading, useToken } from '@chakra-ui/react'
+import ProtectedPage from '../components/protectedPage'
+import { useAuth } from '../hooks'
 
 export default function Home() {
+  const [file, setFile] = useState('')
+  const [videoSrc, setVideoSrc] = useState('')
+
+  const videoRef = useRef(null)
+  const {token} = useAuth('')
+
+  useEffect(()=>{
+    const src = URL.createObjectURL(new Blob([file], {
+      type: 'video/mp4'
+    }))
+    setVideoSrc(src)
+  }, [file])
+
+  const submitFileForProcessing = (file)=> {
+    fetch('https://api.symbl.ai/v1/process/video', {
+      method: 'POST',
+      headers: {
+        'x-api-key': token,
+        'Content-Type': 'video/mp4'
+      },
+      body: file,
+      json: true
+    })
+    .then((rawResult)=> rawResult.json())
+    .then((result)=> {
+      console.log(file)
+      console.log(result)
+    })
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <ProtectedPage>
+      <Container maxWidth="1200px">
+        <Box marginBottom="1rem">
+          <InputGroup marginBottom="2rem">
+            <Input type="file" id="input" accept="video/" ref={videoRef}
+            onChange={(e)=> setFile(e.target.files[0])}/>
+          </InputGroup>
+          <Box bg="lightgray" marginBottom="1rem">
+          <AspectRatio maxH="100%" ratio={16/9}>
+            <video id="video-summary" controls src={videoSrc}/>
+          </AspectRatio>
+        </Box>
+        <Button colorScheme="teal" size="md" onClick={()=>submitFileForProcessing()}>Send for processing</Button>
+        </Box>
+        <Divider orientation="horizontal"/>
+        <Heading>Processing Data</Heading>
+        <SimpleGrid columns={2} spacingX="40px" spacingY="20px" marginTop="1rem">
+          <Box boxShadow="dark-lg" p="6" rounded="md" bg="white">
+            <Container margin="1rem">
+              <Heading as="h4" size="md">
+                Transcript from API
+              </Heading>
+            </Container>
+          </Box>
+        </SimpleGrid>
+      </Container>
+    </ProtectedPage>
   )
 }

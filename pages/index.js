@@ -57,7 +57,7 @@ export default function Home() {
   )
 
   const getTranscripts = () => {
-    fetch(`https://api.symbl.ai/v1/conversations/${conversationId}/messages`, {
+    fetch(`https://api.symbl.ai/v1/conversations/${conversationId}/messages?sentiment=true`, {
       method: 'GET',
       headers: {
         'x-api-key': token,
@@ -87,6 +87,8 @@ export default function Home() {
         setStatus('in_progress')
       })
   }
+  
+
   return (
     <ProtectedPage>
       <Container maxWidth="1200px">
@@ -141,19 +143,15 @@ export default function Home() {
           <Box boxShadow="dark-lg" p="6" rounded="md" bg="white">
             <Container margin="1rem">
               <Heading as="h4" size="md">
-                Transcripts pulled from Conversation API
+                Transcript from Conversation API
               </Heading>
               <List spacing={3} margin="2rem">
                 {messages.map((message) => (
-                  <ListItem>
-                    <Container key={message.id}>
+                  <ListItem key={message.id}>
+                    <Container>
                       <Text fontSize="lg">{message.text}</Text>
-                      <Badge colorScheme="green">
-                        {`${new Date(
-                          message.startTime,
-                        ).toDateString()} ${new Date(
-                          message.startTime,
-                        ).toTimeString()}`}
+                      <Badge>
+                        {message.sentiment.suggested}
                       </Badge>
                     </Container>
                   </ListItem>

@@ -5,6 +5,7 @@ import {
   Container,
   Flex,
   Heading,
+  Image,
   Button,
   Text,
   AspectRatio,
@@ -22,13 +23,14 @@ export default function Header() {
         justify="space-between"
         wrap="wrap"
         padding="1.5rem"
-        bg="teal.500"
+        bg="#1F74BF"
         color="white"
         marginBottom="2rem"
       >
         <Flex align="center" mr={5}>
+        <Image src="logo.png"/>
           <Heading as="h1" size="lg" letterSpacing={'-.1rem'}>
-            Video Processing App
+                Video Processing App
           </Heading>
         </Flex>
       </Flex>

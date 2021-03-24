@@ -98,6 +98,8 @@ export default function Home() {
               type="file"
               id="input"
               accept="audio/*, video/*"
+              border="2px"
+              borderColor="#1F74BF"
               onChange={(e) => setFile(e.target.files[0])}
             />
           </InputGroup>
@@ -114,7 +116,7 @@ export default function Home() {
           </Box>
 
           <Button
-            colorScheme="teal"
+            bg="#5BD9AB"
             size="md"
             disabled={submitted}
             onClick={() => {
@@ -140,7 +142,7 @@ export default function Home() {
           spacingY="20px"
           marginTop="1rem"
         >
-          <Box boxShadow="dark-lg" p="6" rounded="md" bg="white">
+          <Box boxShadow="dark-lg" p="6" rounded="md" bg="#8BB4D9">
             <Container margin="1rem">
               <Heading as="h4" size="md">
                 Transcript from Conversation API

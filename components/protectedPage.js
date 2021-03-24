@@ -37,15 +37,19 @@ export default function ProtectedPage({children}) {
             <Input
               placeholder="appId"
               size="md"
+              border="1px"
+              borderColor="#1F74BF"
               onChange={(e) => setAppId(e.target.value)}
             />
             <Input
               placeholder="appSecret"
               size="md"
+              border="1px"
+              borderColor="#1F74BF"
               onChange={(e) => setAppSecret(e.target.value)}
             />
           </Stack>
-          <Button onClick={() => loginToSymbl()}>Login</Button>
+          <Button onClick={() => loginToSymbl()} bg="#5BD9AB">Login</Button>
         </Container>
       ) : (
         children

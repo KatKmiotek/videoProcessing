@@ -29,7 +29,7 @@ export default function Home() {
   const [status, setStatus] = useState('not started')
   const [messages, setMessages] = useState([])
 
-  console.log(messages)
+  // console.log(messages)
   useEffect(() => {
     const src = URL.createObjectURL(new Blob([file], {type: 'video/mp4'}))
     setVideoSrc(src)
@@ -81,7 +81,7 @@ export default function Home() {
     })
       .then((rawResult) => rawResult.json())
       .then((result) => {
-        console.log(result)
+        // console.log(result)
         setConversationId(result.conversationId)
         setJobId(result.jobId)
         setStatus('in_progress')
@@ -130,12 +130,12 @@ export default function Home() {
             {status === 'not started'
               ? ''
               : status === 'in_progress'
-              ? 'processing'
+              ? 'processing data ...'
               : status}
           </Heading>
         </Box>
         <Divider orientation="horizontal" />
-        <Heading>Processing Data</Heading>
+        {/* <Heading>Processing Data...</Heading> */}
         <SimpleGrid
           columns={2}
           spacingX="40px"

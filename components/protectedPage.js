@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Container, Button, Input, Stack, Box, Heading, Link, Image, ExternalLinkIcon, Text} from '@chakra-ui/react'
+import {Container, Button, Input, Stack, Box, Heading, Link,} from '@chakra-ui/react'
 import Header from './header'
 import {useAuth} from '../hooks/'
 
@@ -24,7 +24,7 @@ export default function ProtectedPage({children}) {
       }),
     })
     const json = await response.json()
-    console.log(json)
+    // console.log(json)
     setToken(json.accessToken)
   }
 
@@ -42,6 +42,7 @@ export default function ProtectedPage({children}) {
               onChange={(e) => setAppId(e.target.value)}
             />
             <Input
+              type="password"
               placeholder="appSecret"
               size="md"
               border="1px"
@@ -52,8 +53,8 @@ export default function ProtectedPage({children}) {
           <Button onClick={() => loginToSymbl()} bg="#5BD9AB">Login</Button>
           <Box boxShadow="dark-lg" p="6" marginTop="20" rounded="md" bg="white">
             <Container margin="1rem">
-            <Text>
-              <Heading as="h4" size="sm" marginBottom="5">
+            <Box fontSize="6x1">
+              <Heading size="sm" marginBottom="5">
                 Login Instructions:
               </Heading>
               ⋆ Please create a free account on <Link href="https://symbl.ai/" isExternal>
@@ -63,7 +64,7 @@ export default function ProtectedPage({children}) {
               
               ⋆ This app has been made as part of <Link href="https://egghead.io/courses/create-contextual-video-analysis-app-with-nextjs-and-symbl-ai-4efb" is isExternal>
               <strong> EggHead.io </strong></Link> course 
-               </Text>
+               </Box>
               
               
             </Container>

@@ -1,17 +1,9 @@
 import React from 'react'
 import {
-  SimpleGrid,
-  Box,
-  Container,
   Flex,
   Heading,
   Image,
-  Button,
-  Text,
-  AspectRatio,
-  Divider,
-  Input,
-  InputGroup,
+  Link
 } from '@chakra-ui/react'
 
 export default function Header() {
@@ -28,7 +20,7 @@ export default function Header() {
         marginBottom="2rem"
       >
         <Flex align="center" mr={5}>
-        <Image src="logo.png"/>
+        <Link href="/"><Image alt = "logo" src="logo.png" width="200" height="200"/></Link>
           <Heading as="h1" size="lg" letterSpacing={'-.1rem'}>
                 Video Processing App
           </Heading>

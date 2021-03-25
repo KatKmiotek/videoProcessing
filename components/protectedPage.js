@@ -56,12 +56,12 @@ export default function ProtectedPage({children}) {
               <Heading as="h4" size="sm" marginBottom="5">
                 Login Instructions:
               </Heading>
-              1) Please create a free account on <Link href="https://symbl.ai/" isExternal>
+              ⋆ Please create a free account on <Link href="https://symbl.ai/" isExternal>
                <strong>Symbl.ai</strong></Link> website. <br/>
 
-              2) To login use API credentials provided in the HOME tab<br/>
-               <Image src="homeTab.png" marginTop="2" marginBottom="2"/>
-              3) App made as part of <Link href="https://egghead.io/courses/create-contextual-video-analysis-app-with-nextjs-and-symbl-ai-4efb" is isExternal>
+              ⋆ To login use API credentials provided in the HOME tab<br/>
+              
+              ⋆ This app has been made as part of <Link href="https://egghead.io/courses/create-contextual-video-analysis-app-with-nextjs-and-symbl-ai-4efb" is isExternal>
               <strong> EggHead.io </strong></Link> course 
                </Text>
               
